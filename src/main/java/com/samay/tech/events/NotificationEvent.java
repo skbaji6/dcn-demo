@@ -1,23 +1,23 @@
 package com.samay.tech.events;
 
-import org.springframework.context.ApplicationEvent;
-
 import com.samay.tech.model.Notification;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
- * @author Arquitectura
+ * @author Bhaji Shaik
  */
-public final class NotificationEvent extends ApplicationEvent {
+@ToString
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public final class NotificationEvent {
 
-    private final Notification notification;
-
-    public NotificationEvent(Object source, Notification notification) {
-        super(source);
-        this.notification = notification;
-    }
-
-    public Notification getNotification() {
-        return notification;
-    }
+	private Notification notification;
 
 }

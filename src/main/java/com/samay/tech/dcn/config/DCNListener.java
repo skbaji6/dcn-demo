@@ -1,5 +1,12 @@
 package com.samay.tech.dcn.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
+import com.samay.tech.amqp.config.KafkaClient;
+import com.samay.tech.events.NotificationEvent;
+import com.samay.tech.model.Notification;
+
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -10,12 +17,6 @@ import oracle.jdbc.dcn.QueryChangeDescription;
 import oracle.jdbc.dcn.RowChangeDescription;
 import oracle.jdbc.dcn.TableChangeDescription;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
-
-import com.samay.tech.events.NotificationEvent;
-import com.samay.tech.model.Notification;
-
 @Slf4j
 public class DCNListener implements DatabaseChangeListener {
 
@@ -24,7 +25,10 @@ public class DCNListener implements DatabaseChangeListener {
     private DatabaseChangeRegistration databaseChangeRegistration;
 
     @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+    private KafkaClient KafkaClient;
+    
+    @Value(value = "${message.topic.name}")
+    private String topicName;
 
     @Override
     public void onDatabaseChangeNotification(DatabaseChangeEvent databaseChangeEvent) {
@@ -44,7 +48,8 @@ public class DCNListener implements DatabaseChangeListener {
                             Notification notification = Notification.builder().table(tableChange.getTableName())
                                     .operation(rcd.getRowOperation().name())
                                     .rowId(rcd.getRowid().stringValue()).build();
-                            applicationEventPublisher.publishEvent(new NotificationEvent(this, notification));
+                            //applicationEventPublisher.publishEvent(new NotificationEvent(this, notification));
+                            KafkaClient.sendMessageWithCallBack(topicName, new NotificationEvent(notification));
                         }
 
                     }

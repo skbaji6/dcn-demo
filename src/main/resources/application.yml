@@ -5,4 +5,24 @@ dcn:
     user : system
     password : oracle
 
+spring:
+  kafka:
+    consumer:
+      group-id: demo-group-id
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: "com.samay.tech.events"
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
+kafka:
+  bootstrapAddress: localhost:9092
+  consumer:
+      group-id: demo-group-id
+message: 
+  topic:
+    name: dcn
+   

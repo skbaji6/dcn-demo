@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public class DcnRegister {
 
-    public static final String SELECT_FROM_NOTIFICATIONS = "select * from notifications";
+    public static final String SELECT_FROM_NOTIFICATIONS = "select * from NHOWN.SCOR_PACE_MMT_INDEXER";
     private DataSource dataSource;
 
     private DCNListener listener;
@@ -55,7 +55,6 @@ public class DcnRegister {
             oracleConnection = (OracleConnection) dataSource.getConnection();
 
             dcr = oracleConnection.registerDatabaseChangeNotification(props);
-            //dcr = oracleConnection.getDatabaseChangeRegistration(332);
             statement = oracleConnection.createStatement();
             ((OracleStatement) statement).setDatabaseChangeRegistration(dcr);
 
@@ -83,7 +82,6 @@ public class DcnRegister {
 
         try {
             oracleConnection.unregisterDatabaseChangeNotification(dcr);
-            oracleConnection.unregisterDatabaseChangeNotification(332);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
