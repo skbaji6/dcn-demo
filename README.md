@@ -25,6 +25,6 @@ Update Apache Kafka log file path in “config/server.properties” configuratio
 
 #####Kafka startup Commnds:
 	
-	cd C:\kafka_2.13-2.8.0\bin\
-	zookeeper-server-start.bat ../../config/zookeeper.properties
-	kafka-server-start.bat ../../config/server.properties
+	cd C:\kafka_2.13-2.8.0\bin\wondows
+	> zookeeper-server-start.bat ../../config/zookeeper.properties
+	> kafka-server-start.bat ../../config/server.properties
