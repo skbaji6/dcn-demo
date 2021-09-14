@@ -1,7 +1,7 @@
 # Database Change Notification - Demo
 
 
-###Kafka Setup
+### Kafka Setup
 
 Download Kafka from https://kafka.apache.org/downloads
 
@@ -23,7 +23,7 @@ Update Apache Kafka log file path in “config/server.properties” configuratio
 
 	log.dirs=C:\kafka_2.13-2.8.0\data\kafka
 
-#####Kafka startup Commnds:
+##### Kafka startup Commnds:
 	
 	cd C:\kafka_2.13-2.8.0\bin\wondows
 	> zookeeper-server-start.bat ../../config/zookeeper.properties
