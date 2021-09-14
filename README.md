@@ -28,3 +28,14 @@ Update Apache Kafka log file path in “config/server.properties” configuratio
 	cd C:\kafka_2.13-2.8.0\bin\wondows
 	> zookeeper-server-start.bat ../../config/zookeeper.properties
 	> kafka-server-start.bat ../../config/server.properties
+
+
+##### SET_ROWID_THRESHOLD Procedure
+
+This procedure configures the maximum number of rows of a table published in a change notification if the rows of the table are modified in a transaction.
+
+Syntax
+
+	DBMS_CQ_NOTIFICATION.SET_ROWID_THRESHOLD (  
+	  tbname     IN  VARCHAR2,	
+	  threshold  IN  NUMBER);
